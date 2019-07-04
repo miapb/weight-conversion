@@ -1,19 +1,30 @@
 <template>
 
   <div id="weight-conversion">
-    <h1>Weight Conversion</h1>
-    <div id = "databinding">
+
+    <div class="header">
+      <h1>Weight Conversion</h1>
+    </div>
+    <div class="unit_from">
       <h3>Convert from:</h3>
-      <select id="convert_from_unit" v-model = "convertfrom">
-        <option v-for = "option in units"  :value="option.name" :key="option.name"> {{option.desc}} </option><br/>
-      </select><br/>
+        <select id="convert_from_unit" v-model = "convertfrom">
+          <option v-for = "option in units"  :value="option.name" :key="option.name"> {{option.desc}} </option><br/>
+        </select><br/>
+    </div>
+    <div class="unit_to">
       <h3>Convert to:</h3>
-      <select id="convert_to_unit"  v-model = "convertto">
-        <option v-for = "option in units" :value="option.name" :key="option.name">{{option.desc}}</option>
-      </select><br/><br/>
-      <h2><input type="number" id="input_amount" min="0" v-model="amount" placeholder = "Enter amount" /> {{convertfrom}} = {{finalamount}} {{convertto}}</h2>
+        <select id="convert_to_unit"  v-model = "convertto">
+          <option v-for = "option in units" :value="option.name" :key="option.name">{{option.desc}}</option>
+        </select><br/><br/>
+    </div>
+    <div class="input_amount">
+      <input type="number" id="input_amount" min="0" v-model="amount" placeholder = "Enter amount" />
+    </div>
+    <div class="result">
+     {{convertfrom}} = {{finalamount.toPrecision(5)}} {{convertto}}
     </div>
   </div>
+  
 </template>
 
 <script>
@@ -43,7 +54,7 @@ export default {
         } if (to == "st") {
           final = Math.round((this.amount * 0.157473044) * 100) / 100;
         }  if (to == "kg") {
-          final = this.amount;
+          final = this.amount*1;
         }
         break;
         
@@ -53,7 +64,7 @@ export default {
         } if (to == "st") {
           final = Math.round((this.amount * 0.0714285714) * 100) / 100;
         }  if (to == "lbs") {
-          final = this.amount;
+          final = this.amount*1;
         }
         break;
 
@@ -63,7 +74,7 @@ export default {
         } if (to == "lbs") {
           final = Math.round((this.amount * 14) * 100) / 100;
         }  if (to == "st") {
-          final = this.amount;
+          final = this.amount*1;
         }
         break;
         }
@@ -80,20 +91,23 @@ export default {
 
 #weight-conversion {
   padding-bottom: 10px;
-  margin: 0 auto;
+  margin: auto;
   border-radius: 5px;
   width: 40%;
+  height: 50%;
   background-color: aliceblue;
-  -webkit-box-shadow: 0px 0px 85px 2px rgba(0,0,0,0.63);
-  -moz-box-shadow: 0px 0px 85px 2px rgba(0,0,0,0.63);
-  box-shadow: 0px 0px 85px 2px rgba(0,0,0,0.63);
+  box-shadow: 0px 1px 19px 3px rgba(0, 0, 0, 0.35);
   min-width: 400px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 0.5fr 0.5fr 0.5fr;
+  grid-template-areas: "header header" "unit_from unit_from" "unit_to unit_to" "input_amount result";
 }
 
 h1 {
   font-size: 3em;
   color: aliceblue;
-  background-image: linear-gradient(to right bottom, #a8c1e7, #a0b2d9, #98a3ca, #9094bb, #8886ac);
+  background-color: #556E99;
   margin-top: 0px;
   padding: 30px 0;
   border-radius: 5px 5px 0 0;
@@ -107,6 +121,9 @@ h1 {
   font-family: 'Maven Pro', Helvetica, Arial, sans-serif;
   border-radius: 9px;
   -webkit-appearance: none;
+  float: right;
+  grid-area: input_amount; 
+  margin: auto 0;
 }
 
 #convert_from_unit{
@@ -119,6 +136,29 @@ h1 {
   width: 10em;
   padding: 12px 20px;
   border-radius: 9px;
+}
+
+.header { 
+  grid-area: header; 
+}
+
+.unit_from { 
+  grid-area: unit_from; 
+}
+
+.unit_to { 
+  grid-area: unit_to; 
+}
+
+.input_amount { 
+  grid-area: input_amount; 
+  margin: auto 0;
+}
+
+.result { 
+  grid-area: result;
+  text-align: left; 
+  margin: auto 0;
 }
 
 
