@@ -26,7 +26,7 @@ export default {
 }
 
 html {
-  background-image: linear-gradient(to right bottom, #7b99c7, #49b1d5, #34c7c6, #72d6a2, #bfdc7d);
+  background-image: linear-gradient(to right bottom, #eaeef5, #dae1ee, #ccd3e7, #bec6e0, #b2b8d8);
   background-repeat: no-repeat;
   height: 100%;
 }
