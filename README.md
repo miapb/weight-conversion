@@ -1,4 +1,7 @@
 # weight-conversion
+Weight conversion application made in Vue.js.
+
+[Live demo](https://miapb.github.io/weight-conversion/)
 
 ## Project setup
 ```
